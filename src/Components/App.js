@@ -3,21 +3,18 @@ import PageTemplate from './PageTemplate';
 import TodoInput from './TodoInput';
 import TodoList from './TodoList';
 
+const initialTodos = new Array(500).fill(0).map(
+    (foo, index) => ({ 
+        id: index, 
+        text: `일정 ${index}`,
+        done: false 
+    })
+);
+
 class App extends Component {
     state = {
         input: '',
-        todos: [
-            {
-                id: 0,
-                text: '리액트공부하기',
-                done: true
-            },
-            {
-                id: 1,
-                text: '컴포넌트 스타일링',
-                done: false
-            },
-        ]
+        todos: initialTodos
     }
 
     id = 1
@@ -79,7 +76,7 @@ class App extends Component {
     render() {
         const { input, todos } = this.state;
         const { handleChange, handleInsert, handleToggle, handleRemove } = this;
-        
+
         return (
             <PageTemplate>
                 <TodoInput onChange={handleChange} onInsert={handleInsert} value={input}/>
